@@ -1,0 +1,110 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+class Node {
+		int val;
+		Node left;
+		Node right;
+
+		Node(int value) {
+			val=value;
+			left=null;
+			right=null;
+		}
+}
+
+class BinarySearchTree {
+	Node root;
+
+	BinarySearchTree(Node node) {
+		root=node;
+	}
+
+/******************************************************
+			PreOrder Traversal With Recursion
+*******************************************************/
+	void printPreorder(Node root) {
+		if(root==null) return;
+		System.out.println(root.val);
+		printPreorder(root.left);
+		printPreorder(root.right);
+	}
+
+/******************************************************
+				Search - Recursive
+*******************************************************/
+
+	Node search(Node root, int key) {
+		if(root==null || root.val==key) return root;
+		if(key<root.val) return search(root.left,key);
+		else return search(root.right,key);
+	}
+
+/******************************************************
+				Insert - Recursive
+*******************************************************/
+
+	Node insert(Node root, int key) {
+		if(root==null) { return new Node(key);}
+		if(key>root.val) root.right=insert(root.right,key);
+		else root.left=insert(root.left,key);
+		return root;
+	}
+
+/******************************************************
+				Deletion - Recursive
+*******************************************************/	
+	
+	Node delete(Node root, int key) {
+		if(root==null) return root;
+		if(key>root.val) root.right=delete(root.right,key);
+		else if(key<root.val) root.left=delete(root.left,key);
+		else {
+			if(root.left==null) return root.right;
+			else if(root.right==null) return root.left;
+			else {
+				root.val=keyOfInorderSuccessor(root.right);
+				root.right=delete(root.right,root.val);
+			}
+		}
+		return root;
+	}
+
+	int keyOfInorderSuccessor(Node root) {
+		Node prev=null;
+		while(root!=null) {
+			prev=root;
+			root=root.left;
+		}
+		return prev.val;
+	}
+
+	public static void main(String[] args) {
+		BinarySearchTree bt=new BinarySearchTree(new Node(20));
+		bt.root.left=new Node(5);
+		bt.root.right=new Node(35);
+
+		System.out.println("PreOrder Traversal : ");
+		bt.printPreorder(bt.root);
+
+		Node keyNode=bt.search(bt.root,35);
+		if(keyNode==null)
+			System.out.println("Not found");
+		else
+			System.out.println("Searching for 35 : " + keyNode.val);
+
+		System.out.println("Inserting 4,10,6,12,8,7 : ");
+		bt.insert(bt.root,4); bt.insert(bt.root,10); bt.insert(bt.root,6); bt.insert(bt.root,12); bt.insert(bt.root,8);bt.insert(bt.root,7);
+
+		System.out.println("PreOrder Traversal : ");
+		bt.printPreorder(bt.root);
+
+		System.out.println("Deleting 5 now : ");
+		bt.delete(bt.root,5);
+
+		System.out.println("PreOrder Traversal after deletion of 5 : ");
+		bt.printPreorder(bt.root);
+
+	}
+}
