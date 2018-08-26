@@ -3,11 +3,11 @@ import java.util.Queue;
 import java.util.*;
 
 
-class Graph {
+class GraphAdjacencyLinkedList {
 	int V;
 	LinkedList<Integer> adjacencyLinkedList[];
 
-	Graph(int vertices) {
+	GraphAdjacencyLinkedList(int vertices) {
 		this.V=vertices;
 		int i;
 		adjacencyLinkedList=new LinkedList[this.V];
@@ -85,7 +85,7 @@ Deapth First Search or DFS Traversal
 	}
 
 	public static void main(String args[]) {
-		Graph G=new Graph(4);
+		GraphAdjacencyLinkedList G=new GraphAdjacencyLinkedList(4);
 		G.addEdge(0,1);G.addEdge(0,2);G.addEdge(1,2);G.addEdge(2,0);G.addEdge(2,3);G.addEdge(3,3);
 		G.printGraph();
 		System.out.println("Printing the Breadth First Traversal of the graph : ");
