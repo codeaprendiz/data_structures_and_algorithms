@@ -9,6 +9,77 @@ class Sort {
 		arr[j]=temp;
 	}
 
+
+/******************************************************************************
+		                Quick Sort
+*******************************************************************************/
+	void quickSort(int arr[],int l,int r) {
+		int p;
+		if(l<r) {
+			p=partition(arr,l,r);
+			quickSort(arr,l,p-1);
+			quickSort(arr,p+1,r);
+		}
+	}
+
+	int partition(int arr[],int l,int r) {
+		int i=l-1,j=l,pivot=arr[r];
+		while(j<r) {
+			if(arr[j]<=pivot) {
+				i=i+1;
+				swap(arr,i,j);
+			}
+			j+=1;
+		}
+		swap(arr,i+1,r);
+		return i+1;
+	}
+
+/******************************************************************************
+		                Merge Sort
+*******************************************************************************/
+	void mergeSort(int arr[],int l,int r) {
+		int m=(l+r)/2;
+		if(l<r) {
+			mergeSort(arr,l,m);
+			mergeSort(arr,m+1,r);
+			merge(arr,l,m,r);
+		}
+	}
+
+	void merge(int arr[],int l,int m,int r) {
+		int tempA[]=new int[m-l+1],tempB[]=new int[r-m],i,j,k;
+		for(i=0;i<m-l+1;i++)
+			tempA[i]=arr[l+i];
+		for(j=0;j<r-m;j++)
+			tempB[j]=arr[j+m+1];
+
+		i=0;j=0;k=l;
+		while(i<m-l+1 && j<r-m) {
+			if(tempA[i]<tempB[j]) {
+				arr[k]=tempA[i];
+				i+=1;
+			}
+			else {
+				arr[k]=tempB[j];
+				j+=1;
+			}
+			k+=1;
+		}
+
+		while(i<m-l+1) {
+			arr[k]=tempA[i];
+			k+=1;
+			i+=1;
+		}
+
+		while(j<r-m) {
+			arr[k]=tempB[j];
+			k+=1;
+			j+=1;
+		}
+	}
+
 /******************************************************************************
 		                Bubble Sort
 *******************************************************************************/
@@ -76,8 +147,22 @@ class Sort {
 		int arr2[]={9,8,7,6,5,4,3,2,1};
 		System.out.println("\nArray before selection sort : ");
 		s.printArray(arr2,9);
-		s.insertionSort(arr2,9);
+		s.selectionSort(arr2,9);
 		System.out.println("\nArray after selection sort : ");
 		s.printArray(arr2,9);
+
+		int arr3[]={9,8,7,6,5,4,3,2,1};
+		System.out.println("\nArray before quick sort : ");
+		s.printArray(arr3,9);
+		s.quickSort(arr3,0,8);
+		System.out.println("\nArray after quick sort : ");
+		s.printArray(arr3,9);
+
+		int arr4[]={9,8,7,6,5,4,3,2,1};
+		System.out.println("\nArray before merge sort : ");
+		s.printArray(arr4,9);
+		s.mergeSort(arr4,0,8);
+		System.out.println("\nArray after merge sort : ");
+		s.printArray(arr4,9);
 	}
 }
