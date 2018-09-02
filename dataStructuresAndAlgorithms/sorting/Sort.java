@@ -11,6 +11,31 @@ class Sort {
 
 
 /******************************************************************************
+		                Heap Sort
+*******************************************************************************/
+	void heapSort(int arr[],int size) {
+		int i=0;
+		for(i=0;i<size/2-1;i++)
+			heapify(arr,size,i);
+		for(i=size-1;i>=0;i--) {
+			int smallest=arr[0];
+			arr[0]=arr[i];
+			arr[i]=smallest;
+			heapify(arr,i,0);
+		}
+	}
+
+	void heapify(int arr[],int size,int startIndex) {
+		int leftChildIndex=2*startIndex+1,rightChildIndex=2*startIndex+2,largestIndex=startIndex;
+		if(leftChildIndex<size && arr[leftChildIndex]>arr[largestIndex]) largestIndex=leftChildIndex;
+		if(rightChildIndex<size && arr[rightChildIndex]>arr[largestIndex]) largestIndex=rightChildIndex;
+		if(largestIndex!=startIndex) {
+			swap(arr,largestIndex,startIndex);
+			heapify(arr,size,largestIndex);
+		}
+	}
+
+/******************************************************************************
 		                Quick Sort
 *******************************************************************************/
 	void quickSort(int arr[],int l,int r) {
@@ -164,5 +189,12 @@ class Sort {
 		s.mergeSort(arr4,0,8);
 		System.out.println("\nArray after merge sort : ");
 		s.printArray(arr4,9);
+
+		int arr5[]={10,9,8,7,6,5,4,3,2,1};
+		System.out.println("\nArray before heap sort : ");
+		s.printArray(arr5,10);
+		s.heapSort(arr5,10);
+		System.out.println("\nArray after heap sort : ");
+		s.printArray(arr5,10);
 	}
 }
