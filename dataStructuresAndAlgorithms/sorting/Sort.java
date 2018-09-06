@@ -156,6 +156,29 @@ class Sort {
 	public static void main(String args[]) {
 		int arr[]={9,8,7,6,5,4,3,2,1};
 		Sort s=new Sort();
+		
+		int[] array1 = new int[500];
+    		int[] array2 = new int[3500];
+    		int[] array3 = new int[80000];
+
+    		for(int i=0; i<array1.length; i++) {
+	  		array1[i]=(int)(Math.random()*100000);
+	  	}
+
+    		for(int i=0; i<array2.length; i++) {
+     		   	array2[i]=(int)(Math.random()*100000);
+    		}
+
+    		for(int i=0; i<array3.length; i++) {
+       			array3[i]=(int)(Math.random()*100000);
+    		}
+
+    		s.printArray(array3,80000);
+    		s.quickSort(array3,0,79999);
+    		System.out.println();
+    		s.printArray(array3,80000);
+		
+		
 		System.out.println("Array before bubble sort : ");
 		s.printArray(arr,9);
 		s.bubbleSort(arr,9);
