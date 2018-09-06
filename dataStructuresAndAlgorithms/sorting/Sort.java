@@ -179,7 +179,7 @@ class Sort {
     		s.printArray(array3,80000);
 		
 		
-		System.out.println("Array before bubble sort : ");
+		System.out.println("\nArray before bubble sort : ");
 		s.printArray(arr,9);
 		s.bubbleSort(arr,9);
 		System.out.println("\nArray after bubble sort : ");
