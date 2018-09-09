@@ -85,6 +85,30 @@ class DoublyLinkedList {
 		}
 	}
 
+/********************************************************************************
+			Reverse a Doubly Linked List
+*********************************************************************************/
+
+	void reverse() {
+		Node temp = null; 
+        Node current = head; 
+  
+        /* swap next and prev for all nodes of  
+         doubly linked list */
+        while (current != null) { 
+            temp = current.prev; 
+            current.prev = current.next; 
+            current.next = temp; 
+            current = current.prev; 
+        } 
+  
+        /* Before changing head, check for the cases like empty  
+         list and list with only one node */
+        if (temp != null) { 
+            head = temp.prev; 
+        } 
+	}
+
 	public static void main(String args[]) {
 		DoublyLinkedList DLL=new DoublyLinkedList();
 		DLL.insertFront(1);
@@ -98,6 +122,8 @@ class DoublyLinkedList {
 		DLL.insertEnd(9);
 		DLL.iterateOverList();
 
+		
+
 		System.out.println("Deleting 2 : ");
 		DLL.deleteNode(2);
 		DLL.iterateOverList();
@@ -107,5 +133,19 @@ class DoublyLinkedList {
 		System.out.println("Deleting 9 : ");
 		DLL.deleteNode(9);
 		DLL.iterateOverList();
+
+		DLL.insertFront(1);
+		DLL.insertFront(2);
+		System.out.println("After inserting 1 and 2 at fronts : ");
+		DLL.iterateOverList();
+		System.out.println("After inserting 6 after head : ");
+		DLL.insertAfter(DLL.head,6);
+		DLL.iterateOverList();
+
+		System.out.println("Reversing the linked list now : ");
+		DLL.reverse();
+		DLL.iterateOverList();
+
+
 	}
 }
