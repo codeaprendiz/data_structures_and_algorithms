@@ -100,6 +100,39 @@ assumes that both n1 and n2 are present in BST
         	return node;
    	 }
 
+/************************************************************************ 
+Function to check if this is a binary tree or not
+*************************************************************************/
+
+   	 // To keep tract of previous node in Inorder Traversal
+    Node prev;
+ 
+    boolean isBST()  {
+        prev = null;
+        return isBST(root);
+    }
+ 
+    /* Returns true if given search tree is binary
+       search tree (efficient version) */
+    boolean isBST(Node node)
+    {
+        // traverse the tree in inorder fashion and
+        // keep a track of previous node
+        if (node != null)
+        {
+            if (!isBST(node.left))
+                return false;
+ 
+            // allows only distinct values node
+            if (prev != null && node.val <= prev.val )
+                return false;
+            prev = node;
+            return isBST(node.right);
+        }
+        return true;
+    }
+
+/*************************************************************************/
 
 	public static void main(String[] args) {
 		BinarySearchTree bt=new BinarySearchTree(new Node(20));
